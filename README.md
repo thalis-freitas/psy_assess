@@ -1,29 +1,48 @@
-# psy_assess
+# PsyAccess
 
-This template should help get you started developing with Vue 3 in Vite.
+## Sumário
+  * [Descrição do projeto](#descrição-do-projeto)
+  * [Funcionalidades](#funcionalidades)
 
-## Recommended IDE Setup
+## Descrição do projeto
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+<p align="justify"> PsyAssess é um sistema que tem como objetivo permitir que psicólogos administrem avaliações psicológicas online, substituindo os tradicionais questionários em papel. Com interfaces separadas para profissionais e pacientes, o sistema simplifica o processo de cadastramento de avaliados, aplicação de instrumentos e análise de resultados. Ele oferece uma solução segura e eficiente para coletar e armazenar dados de avaliações, proporcionando aos psicólogos acesso imediato aos resultados dos testes, mantendo a confidencialidade e a integridade dos dados do avaliado. </p>
 
-## Customize configuration
+## Funcionalidades
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Psicólogos
 
-## Project Setup
+#### Login
+- [ ] Autenticar psicólogos no sistema
 
-```sh
-npm install
-```
+#### Gestão de Avaliados
+- [ ] Cadastrar um novo avaliado
+- [ ] Listar todos os avaliados
+- [ ] Exibir dados de um avaliado específico
+- [ ] Acessar os instrumentos de um avaliado
 
-### Compile and Hot-Reload for Development
+#### Gestão de Instrumentos
+- [ ] Cadastrar um novo instrumento
+- [ ] Listar todos os instrumentos
+- [ ] Acessar dados de um instrumento específico
 
-```sh
-npm run dev
-```
+#### Aplicação de Instrumentos
+- [ ] Aplicar um instrumento a um avaliado
+- [ ] Enviar por e-mail o link do instrumento ao avaliado
 
-### Compile and Minify for Production
+#### Visualização dos Resultados
+- [ ] Visualizar os resultados de um instrumento finalizado
 
-```sh
-npm run build
-```
+### Avaliados
+
+#### Confirmação de Dados
+- [ ] Redirecionamento a partir do link no e-mail, com um token único para a sessão de avaliação
+- [ ] Confirmação dos dados do avaliado
+
+#### Execução do Instrumento
+- [ ] Iniciar a execução do instrumento
+- [ ] Enviar respostas do instrumento
+
+<div align="center">
+  :construction: Em desenvolvimento...
+</div>
