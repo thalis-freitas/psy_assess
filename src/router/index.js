@@ -30,7 +30,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('psy_assess_token')
+  const token = localStorage.getItem('psyAssessToken')
   if (to.name !== 'login' && !token) next({ name: 'login' })
   else next()
 })
