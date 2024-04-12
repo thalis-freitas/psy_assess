@@ -1,5 +1,5 @@
 <script setup >
-import { authApi } from '../../services/authApi'
+import { authApi } from '@/services/authApi'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vuestic-ui'
@@ -27,7 +27,7 @@ const processSuccess = (response) => {
   localStorage.setItem('psy_assess_token', response.data.token)
   localStorage.setItem('currentUser', JSON.stringify(response.data.user))
 
-  showToast({ message: `Boas-vindas!`, color: 'success'})
+  showToast({ message: 'Boas-vindas!', color: 'success'})
   router.push('/')
 }
 </script>

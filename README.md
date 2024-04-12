@@ -13,7 +13,7 @@
 ### Psicólogos
 
 #### Login
-- [ ] Autenticar psicólogos no sistema
+- [x] Autenticar psicólogos no sistema
 
 #### Gestão de Avaliados
 - [ ] Cadastrar um novo avaliado
