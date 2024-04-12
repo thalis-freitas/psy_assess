@@ -36,7 +36,7 @@
           </va-sidebar-item>
         </router-link>
 
-        <router-link to="/evalueted">
+        <router-link to="/evaluated">
           <va-sidebar-item>
             <va-sidebar-item-content>
               <va-icon name="people" />
@@ -51,7 +51,9 @@
     </template>
 
     <template #content>
-      <router-view/>
+      <div class="pb-1">
+        <router-view/>
+      </div>
     </template>
 
   </va-layout>
