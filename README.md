@@ -20,11 +20,13 @@
 - [ ] Listar todos os avaliados
 - [ ] Exibir dados de um avaliado específico
 - [ ] Acessar os instrumentos de um avaliado
+- [ ] Atualizar dados de um avaliado
 
 #### Gestão de Instrumentos
 - [ ] Cadastrar um novo instrumento
 - [ ] Listar todos os instrumentos
 - [ ] Acessar dados de um instrumento específico
+- [ ] Atualizar um instrumento existente
 
 #### Aplicação de Instrumentos
 - [ ] Aplicar um instrumento a um avaliado

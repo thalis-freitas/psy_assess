@@ -1,6 +1,6 @@
 <script setup >
 import { authApi } from '@/services/authApi'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vuestic-ui'
 
@@ -24,12 +24,16 @@ const submitLogin = async function() {
 }
 
 const processSuccess = (response) => {
-  localStorage.setItem('psy_assess_token', response.data.token)
+  localStorage.setItem('psyAssessToken', response.data.token)
   localStorage.setItem('currentUser', JSON.stringify(response.data.user))
 
   showToast({ message: 'Boas-vindas!', color: 'success'})
   router.push('/')
 }
+
+onMounted(() => {
+  if (JSON.parse(localStorage.getItem('currentUser'))) router.push('/')
+})
 </script>
 
 <template>
@@ -62,6 +66,7 @@ const processSuccess = (response) => {
           v-model="user.email"
           label="E-mail"
           name="E-mail"
+          type="email"
         />
         <va-input
           v-model="user.password"
