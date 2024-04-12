@@ -17,7 +17,7 @@ app.use(createVuestic({
     colors: {
       variables: {
         primary: '#242258',
-        secondary: '#947b2f',
+        secondary: '#7777ff'
       },
     },
   },

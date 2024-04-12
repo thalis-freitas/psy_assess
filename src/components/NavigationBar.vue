@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <va-navbar color="primary" class="py-2">
+  <va-navbar color="primary">
     <template #left>
       <va-button
         :icon="$props.showSidebar ? 'menu_open' : 'menu'"
