@@ -3,8 +3,12 @@
   import { useBreakpoint } from 'vuestic-ui'
   import NavBar from './NavigationBar.vue'
 
-  const showSidebar = ref(false)
+  const showSidebar = ref(window.innerWidth <= 640)
   const breakpoints = useBreakpoint()
+
+  window.addEventListener('resize', () => {
+    showSidebar.value = window.innerWidth <= 640
+  })
 </script>
 
 <template>
