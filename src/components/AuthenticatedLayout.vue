@@ -3,7 +3,7 @@
   import { useBreakpoint } from 'vuestic-ui'
   import NavBar from './NavigationBar.vue'
 
-  const showSidebar = ref(true)
+  const showSidebar = ref(false)
   const breakpoints = useBreakpoint()
 </script>
 
