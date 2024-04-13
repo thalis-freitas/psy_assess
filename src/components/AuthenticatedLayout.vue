@@ -3,8 +3,12 @@
   import { useBreakpoint } from 'vuestic-ui'
   import NavBar from './NavigationBar.vue'
 
-  const showSidebar = ref(false)
+  const showSidebar = ref(window.innerWidth <= 640)
   const breakpoints = useBreakpoint()
+
+  window.addEventListener('resize', () => {
+    showSidebar.value = window.innerWidth <= 640
+  })
 </script>
 
 <template>
@@ -32,7 +36,7 @@
           </va-sidebar-item>
         </router-link>
 
-        <router-link to="/evalueted">
+        <router-link to="/evaluated">
           <va-sidebar-item>
             <va-sidebar-item-content>
               <va-icon name="people" />
@@ -47,7 +51,9 @@
     </template>
 
     <template #content>
-      <router-view/>
+      <div class="pb-1" style="overflow-y: auto; height: calc(100vh - 80px)">
+        <router-view/>
+      </div>
     </template>
 
   </va-layout>

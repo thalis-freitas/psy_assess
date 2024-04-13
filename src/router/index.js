@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthenticatedLayout from '@/components/AuthenticatedLayout.vue'
+import EvaluatedForm from '../views/EvaluatedForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,9 +21,26 @@ const router = createRouter({
           component: () => import('../views/InstrumentsView.vue')
         },
         {
-          path: '/evalueted',
-          name: 'evalueted',
-          component: () => import('../views/EvaluetedView.vue')
+          path: '/evaluated',
+          name: 'evaluated',
+          component: () => import('../views/EvaluatedView.vue'),
+        },
+        {
+          path: '/evaluated/form',
+          name: 'evaluatedForm',
+          component: EvaluatedForm,
+        },
+        {
+          path: '/evaluated/form/:id',
+          name: 'evaluatedFormEdit',
+          component: EvaluatedForm,
+          props: true
+        },
+        {
+          path: '/evaluated/:id',
+          name: 'showEvaluated',
+          component: () => import('../views/ShowEvaluated.vue'),
+          props: true
         },
       ]
     }
@@ -30,7 +48,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('psy_assess_token')
+  const token = localStorage.getItem('psyAssessToken')
   if (to.name !== 'login' && !token) next({ name: 'login' })
   else next()
 })

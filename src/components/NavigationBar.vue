@@ -18,7 +18,7 @@
   const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')))
 
   const logout = () => {
-    localStorage.removeItem('psy_assess_token')
+    localStorage.removeItem('psyAssessToken')
     localStorage.removeItem('currentUser')
     delete api.defaults.headers.common['Authorization']
     currentUser.value = ''
@@ -43,7 +43,7 @@
 
     <template #right>
       <va-navbar-item>
-        <va-dropdown>
+        <va-dropdown class="hidden sm:block">
           <template #anchor>
             {{ currentUser.name }}
           </template>
@@ -55,6 +55,13 @@
             Sair
           </va-dropdown-content>
         </va-dropdown>
+
+        <span
+          class="block sm:hidden pointer"
+          @click="logout"
+        >
+          Sair
+        </span>
       </va-navbar-item>
     </template>
   </va-navbar>
