@@ -16,11 +16,11 @@
 - [x] Autenticar psicólogos no sistema
 
 #### Gestão de Avaliados
-- [ ] Cadastrar um novo avaliado
+- [x] Cadastrar um novo avaliado
 - [x] Listar todos os avaliados
 - [ ] Exibir dados de um avaliado específico
+- [x] Atualizar dados de um avaliado
 - [ ] Acessar os instrumentos de um avaliado
-- [ ] Atualizar dados de um avaliado
 
 #### Gestão de Instrumentos
 - [ ] Cadastrar um novo instrumento

@@ -1,12 +1,13 @@
 <script setup>
 import { evaluatedApi } from '@/services/evaluatedApi'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useToast } from 'vuestic-ui'
 
 const { init: showToast } = useToast()
 
 const router = useRouter()
+const route = useRoute()
 
 const evaluated = ref({
   name: '',
@@ -16,18 +17,45 @@ const evaluated = ref({
 })
 
 const formErrors = ref({})
+const isEditing = ref(false)
+
+const convertDate = (dateStr) => {
+  const parts = dateStr.split('/')
+  return `${parts[2]}-${parts[1]}-${parts[0]}`
+}
+
+onMounted(async () => {
+  if (route.params.id) {
+    isEditing.value = true
+    try {
+      const response = await evaluatedApi.getEvaluatedById(route.params.id)
+
+      evaluated.value = response.data.evaluated
+      evaluated.value.birth_date = convertDate(evaluated.value.birth_date)
+    } catch (error) {
+      showToast({
+        message: 'Erro ao obter os dados do avaliado.',
+        color: 'danger'
+      })
+    }
+  }
+})
 
 const submit = async () => {
   formErrors.value = {}
 
   try {
-    await evaluatedApi.createEvaluated(evaluated.value)
+    if (isEditing.value) {
+      await evaluatedApi.updateEvaluated(route.params.id, evaluated.value)
+    } else {
+      await evaluatedApi.createEvaluated(evaluated.value)
+    }
 
     processSuccess()
   } catch (error) {
     formErrors.value = error.response.data.errors
     showToast({
-      message: 'Não foi possível realizar o cadastro. ' +
+      message: 'Não foi possível realizar a operação. ' +
                'Verifique os erros e tente novamente',
       color: 'danger'
     })
@@ -36,21 +64,19 @@ const submit = async () => {
 
 const processSuccess = () => {
   showToast({
-    message: 'Cadastro realizado com sucesso!',
+    message: isEditing ?
+             'Atualização realizada com sucesso!' :
+             'Cadastro realizado com sucesso!',
     color: 'success'
   })
-
   router.push('/evaluated')
 }
 </script>
 
-
 <template>
-  <va-card
-    class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-auto my-6 sm:my-12"
-  >
+  <va-card class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-12 my-6 sm:my-12">
     <va-card-title>
-      Cadastrar avaliado
+      {{ isEditing ? 'Editar avaliado' : 'Cadastrar avaliado' }}
     </va-card-title>
 
     <va-card-content>

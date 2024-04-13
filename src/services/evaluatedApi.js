@@ -7,5 +7,13 @@ export const evaluatedApi = {
 
   createEvaluated: (params) => {
     return api.post('evaluated', params)
+  },
+
+  getEvaluatedById: (id) => {
+    return api.get(`evaluated/${id}`)
+  },
+
+  updateEvaluated: (id, params) => {
+    return api.put(`evaluated/${id}`, params)
   }
 }

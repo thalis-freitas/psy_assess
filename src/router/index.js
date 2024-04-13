@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthenticatedLayout from '@/components/AuthenticatedLayout.vue'
+import EvaluatedForm from '../views/EvaluatedForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,8 +28,14 @@ const router = createRouter({
         {
           path: '/evaluated/form',
           name: 'evaluatedForm',
-          component: () => import('../views/EvaluatedForm.vue'),
-        }
+          component: EvaluatedForm,
+        },
+        {
+          path: '/evaluated/form/:id',
+          name: 'evaluatedForm',
+          component: EvaluatedForm,
+          props: true
+        },
       ]
     }
   ]
