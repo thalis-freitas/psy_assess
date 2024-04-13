@@ -51,7 +51,10 @@
     </template>
 
     <template #content>
-      <div class="pb-1" style="overflow-y: auto; height: calc(100vh - 80px)">
+      <div
+        class="pb-1 overflow-y-auto h-screen"
+        style="height: calc(100vh - 80px)"
+      >
         <router-view/>
       </div>
     </template>
