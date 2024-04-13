@@ -18,7 +18,7 @@
 #### Gestão de Avaliados
 - [x] Cadastrar um novo avaliado
 - [x] Listar todos os avaliados
-- [ ] Exibir dados de um avaliado específico
+- [x] Exibir dados de um avaliado específico
 - [x] Atualizar dados de um avaliado
 - [ ] Acessar os instrumentos de um avaliado
 

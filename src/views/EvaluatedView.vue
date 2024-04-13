@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { evaluatedApi } from '@/services/evaluatedApi'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vuestic-ui'
 import shuffle from 'lodash/shuffle'
 
 const router = useRouter()
@@ -9,6 +10,7 @@ const evaluatedList = ref([])
 const localFilter = ref('')
 const sortBy = ref('name')
 const sortingOrder = ref('asc')
+const { init: showToast } = useToast()
 
 const sortingConfig = { sortable: true, sortingOptions: ['desc', 'asc'] }
 
@@ -26,7 +28,11 @@ const fetchEvaluated = async () => {
     const response = await evaluatedApi.getAllEvaluated()
     evaluatedList.value = shuffle(response.data.evaluated)
   } catch (error) {
-    console.error(`Erro ao obter dados: ${error}`)
+    console.log(error)
+    showToast({
+      message: `Erro ao obter os dados: ${error.response.data.errors}`,
+      color: 'danger'
+    })
   }
 }
 
@@ -38,7 +44,12 @@ const addNewEvaluated = () => {
 
 const updateEvaluated = (index) => {
   const evaluatedId = evaluatedList.value[index].id
-  router.push({ name: 'evaluatedForm', params: { id: evaluatedId } })
+  router.push({ name: 'evaluatedFormEdit', params: { id: evaluatedId } })
+}
+
+const showEvaluated = (index) => {
+  const evaluatedId = evaluatedList.value[index].id
+  router.push({ name: 'showEvaluated', params: { id: evaluatedId } })
 }
 </script>
 
@@ -78,6 +89,13 @@ const updateEvaluated = (index) => {
         preset="plain"
         icon="edit"
         @click="updateEvaluated(rowIndex)"
+        class="pe-2"
+      />
+
+      <va-button
+        preset="plain"
+        icon="visibility"
+        @click="showEvaluated(rowIndex)"
       />
     </template>
     </va-data-table>

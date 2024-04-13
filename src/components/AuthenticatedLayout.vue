@@ -51,7 +51,7 @@
     </template>
 
     <template #content>
-      <div class="pb-1">
+      <div class="pb-1" style="overflow-y: auto; height: calc(100vh - 80px)">
         <router-view/>
       </div>
     </template>

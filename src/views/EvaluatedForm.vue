@@ -64,7 +64,7 @@ const submit = async () => {
 
 const processSuccess = () => {
   showToast({
-    message: isEditing ?
+    message: isEditing.value ?
              'Atualização realizada com sucesso!' :
              'Cadastro realizado com sucesso!',
     color: 'success'
