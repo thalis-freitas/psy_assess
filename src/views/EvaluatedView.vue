@@ -1,8 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { evaluatedApi } from '@/services/evaluatedApi'
-import shuffle from 'lodash/shuffle'
 import DataTable from '@/components/DataTable.vue'
+import { evaluatedApi } from '@/services/evaluatedApi'
+import { ref, onMounted } from 'vue'
+import shuffle from 'lodash/shuffle'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const evaluatedList = ref([])
 
@@ -28,6 +31,10 @@ onMounted(fetchEvaluated)
 const sortBy = ref('name')
 const sortingOrder = ref('asc')
 const filteredCount = ref(0)
+
+const addNewEvaluated = () => {
+  router.push({ name: 'evaluatedForm' })
+}
 </script>
 
 
@@ -35,9 +42,21 @@ const filteredCount = ref(0)
   <va-card
     class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-auto my-6 sm:my-12"
   >
-    <va-card-title>
-      Avaliados
-    </va-card-title>
+    <div class="flex justify-between items-center">
+      <va-card-title>
+        Avaliados
+      </va-card-title>
+      <div class="flex flex-col items-end me-2">
+        <va-button
+          icon="add"
+          color="success"
+          gradient
+          @click="addNewEvaluated"
+        >
+          Novo Avaliado
+        </va-button>
+      </div>
+    </div>
     <data-table
       :items="evaluatedList"
       :base-columns="columns"

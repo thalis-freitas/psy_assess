@@ -22,8 +22,13 @@ const router = createRouter({
         {
           path: '/evaluated',
           name: 'evaluated',
-          component: () => import('../views/EvaluatedView.vue')
+          component: () => import('../views/EvaluatedView.vue'),
         },
+        {
+          path: '/evaluated/form',
+          name: 'evaluatedForm',
+          component: () => import('../views/EvaluatedForm.vue'),
+        }
       ]
     }
   ]

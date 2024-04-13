@@ -55,8 +55,6 @@ onMounted(() => {
     </va-card-title>
     <va-card-content>
       <va-form
-        ref="loginForm"
-        immediate hide-error-messages
         class="flex flex-col gap-2 mb-2"
         @submit.prevent="submitLogin"
         tag="form"
@@ -65,14 +63,12 @@ onMounted(() => {
           autofocus
           v-model="user.email"
           label="E-mail"
-          name="E-mail"
           type="email"
         />
         <va-input
           v-model="user.password"
           label="Senha"
           type="password"
-          name="Senha"
         />
         <span>
           <va-button type="submit"> Entrar </va-button>
