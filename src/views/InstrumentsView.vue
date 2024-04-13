@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { instrumentsApi } from '@/services/instrumentsApi'
+import { useRouter } from 'vue-router'
 import { useToast } from 'vuestic-ui'
 import shuffle from 'lodash/shuffle'
 
+const router = useRouter()
 const instrumentsList = ref([])
 const localFilter = ref('')
 const sortBy = ref('name')
@@ -15,15 +17,14 @@ const sortingConfig = { sortable: true, sortingOptions: ['desc', 'asc'] }
 const columns = [
   { key: 'id', label: 'ID', ...sortingConfig },
   { key: 'name', label: 'Nome', ...sortingConfig },
+  { key: 'actions', label: '-', sortable: false }
 ]
 
 const fetchInstruments = async () => {
   try {
     const response = await instrumentsApi.getAllInstruments()
-    console.log(response)
     instrumentsList.value = shuffle(response.data)
   } catch (error) {
-    console.log(error)
     showToast({
       message: `Erro ao obter os dados: ${error.response.data.errors}`,
       color: 'danger'
@@ -32,6 +33,11 @@ const fetchInstruments = async () => {
 }
 
 onMounted(fetchInstruments)
+
+const showInstrument = (index) => {
+  const instrumentId = instrumentsList.value[index].id
+  router.push({ name: 'showInstrument', params: { id: instrumentId } })
+}
 </script>
 
 <template>
@@ -53,6 +59,13 @@ onMounted(fetchInstruments)
       class="pb-6"
       striped
     >
+    <template #cell(actions)="{ rowIndex }">
+      <va-button
+        preset="plain"
+        icon="visibility"
+        @click="showInstrument(rowIndex)"
+      />
+    </template>
     </va-data-table>
   </va-card>
 </template>

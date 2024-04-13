@@ -1,9 +1,8 @@
 <script setup>
 import { evaluatedApi } from '@/services/evaluatedApi'
 import { onMounted, ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 
-const router = useRouter()
 const route = useRoute()
 const evaluated = ref({})
 
@@ -14,7 +13,10 @@ const fetchEvaluated = async () => {
 
     evaluated.value = response.data.evaluated
   } catch (error) {
-    console.error(`Erro ao obter dados: ${error}`)
+    showToast({
+      message: `Erro ao obter os dados: ${error.response.data.errors}`,
+      color: 'danger'
+    })
   }
 }
 
@@ -44,7 +46,6 @@ onMounted(fetchEvaluated)
       <va-card outlined class="ps-3 mb-2">
         Data de nascimento: {{ evaluated.birth_date }}
       </va-card>
-
     </va-card-content>
 
   </va-card>

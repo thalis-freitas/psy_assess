@@ -42,6 +42,12 @@ const router = createRouter({
           component: () => import('../views/ShowEvaluated.vue'),
           props: true
         },
+        {
+          path: '/instruments/:id',
+          name: 'showInstrument',
+          component: () => import('../views/ShowInstrument.vue'),
+          props: true
+        },
       ]
     }
   ]

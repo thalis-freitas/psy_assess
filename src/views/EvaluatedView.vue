@@ -28,7 +28,6 @@ const fetchEvaluated = async () => {
     const response = await evaluatedApi.getAllEvaluated()
     evaluatedList.value = shuffle(response.data.evaluated)
   } catch (error) {
-    console.log(error)
     showToast({
       message: `Erro ao obter os dados: ${error.response.data.errors}`,
       color: 'danger'

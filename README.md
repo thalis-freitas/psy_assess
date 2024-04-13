@@ -24,7 +24,7 @@
 
 #### Visualização dos Instrumentos disponíveis
 - [x] Listar todos os instrumentos
-- [ ] Acessar dados de um instrumento específico
+- [x] Visualizar dados de um instrumento específico
 
 #### Aplicação de Instrumentos
 - [ ] Aplicar um instrumento a um avaliado
