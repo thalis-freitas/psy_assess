@@ -28,8 +28,8 @@
 - [x] Visualizar dados de um instrumento específico
 
 #### Aplicação de Instrumentos
-- [ ] Aplicar um instrumento a um avaliado
-- [ ] Enviar por e-mail o link do instrumento ao avaliado
+- [x] Aplicar um instrumento a um avaliado
+- [x] Enviar por e-mail o link do instrumento ao avaliado
 
 #### Visualização dos Resultados
 - [ ] Visualizar os resultados de um instrumento finalizado

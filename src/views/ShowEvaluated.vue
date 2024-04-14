@@ -16,6 +16,7 @@ const showModal = ref(false)
 
 const instrument = ref('')
 const instruments = ref([])
+const formErrors = ref([])
 
 const fetchEvaluated = async () => {
   try {
@@ -64,8 +65,10 @@ const applyInstrument = async () => {
 
     processSuccess()
   } catch (error) {
+    formErrors.value = error.response.data
+
     showToast({
-      message: `Ocorreu um erro ao aplicar o instrumento: ${error.response.data.errors}`,
+      message: 'Ocorreu um erro ao aplicar o instrumento',
       color: 'danger'
     })
   }
@@ -134,6 +137,16 @@ const processSuccess = () => {
         searchable
         label="Instrumento"
       />
+
+      <va-alert
+        v-if="formErrors.instrument_id"
+        dense
+        color="warning"
+        icon="warning"
+        class="w-full"
+      >
+        {{ formErrors.instrument_id[0] }}
+      </va-alert>
 
       <div>
         <va-button @click="applyInstrument">
