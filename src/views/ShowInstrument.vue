@@ -13,7 +13,7 @@ const fetchInstrument = async () => {
     instrument.value = response.data
   } catch (error) {
     showToast({
-      message: `Erro ao obter os dados: ${error.response.data.errors}`,
+      message: `Erro ao obter os dados do instrumento: ${error.response.data.errors}`,
       color: 'danger'
     })
   }

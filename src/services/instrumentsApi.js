@@ -7,5 +7,5 @@ export const instrumentsApi = {
 
   getInstrumentById: (id) => {
     return api.get(`instruments/${id}`)
-  },
+  }
 }

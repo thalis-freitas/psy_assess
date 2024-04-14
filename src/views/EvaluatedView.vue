@@ -11,6 +11,7 @@ const localFilter = ref('')
 const sortBy = ref('name')
 const sortingOrder = ref('asc')
 const { init: showToast } = useToast()
+const loading = ref(true)
 
 const sortingConfig = { sortable: true, sortingOptions: ['desc', 'asc'] }
 
@@ -29,9 +30,11 @@ const fetchEvaluated = async () => {
     evaluatedList.value = shuffle(response.data.evaluated)
   } catch (error) {
     showToast({
-      message: `Erro ao obter os dados: ${error.response.data.errors}`,
+      message: `Erro ao obter os dados do avaliado: ${error.response.data.errors}`,
       color: 'danger'
     })
+  } finally {
+    loading.value = false
   }
 }
 
@@ -74,7 +77,10 @@ const showEvaluated = (index) => {
       <va-input v-model="localFilter" placeholder="Buscar..." class="w-full" />
     </div>
 
+    <va-progress-bar class="pb-6"  v-if="loading" indeterminate />
+
     <va-data-table
+      v-else
       v-model:sort-by="sortBy"
       v-model:sorting-order="sortingOrder"
       :items="evaluatedList"

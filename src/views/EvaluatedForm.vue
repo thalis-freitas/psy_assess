@@ -16,7 +16,7 @@ const evaluated = ref({
   birth_date: ''
 })
 
-const formErrors = ref({})
+const formErrors = ref([])
 const isEditing = ref(false)
 
 const convertDate = (dateStr) => {
