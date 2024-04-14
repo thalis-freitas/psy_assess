@@ -11,6 +11,7 @@ const localFilter = ref('')
 const sortBy = ref('name')
 const sortingOrder = ref('asc')
 const { init: showToast } = useToast()
+const loading = ref(true)
 
 const sortingConfig = { sortable: true, sortingOptions: ['desc', 'asc'] }
 
@@ -30,6 +31,8 @@ const fetchInstruments = async () => {
       color: 'danger'
     })
   }
+
+  loading.value = false
 }
 
 onMounted(fetchInstruments)
@@ -50,7 +53,10 @@ const showInstrument = (index) => {
       <va-input v-model="localFilter" placeholder="Buscar..." class="w-full" />
     </div>
 
+    <va-progress-bar class="pb-6" v-if="loading" indeterminate />
+
     <va-data-table
+      v-else
       v-model:sort-by="sortBy"
       v-model:sorting-order="sortingOrder"
       :items="instrumentsList"

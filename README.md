@@ -3,6 +3,7 @@
 ## Sumário
   * [Descrição do projeto](#descrição-do-projeto)
   * [Funcionalidades](#funcionalidades)
+  * [Passo a passo para rodar o projeto localmente](#passo-a-passo-para-rodar-o-projeto-localmente)
 
 ## Descrição do projeto
 
@@ -46,3 +47,31 @@
 <div align="center">
   :construction: Em desenvolvimento...
 </div>
+
+## Passo a passo para rodar o projeto localmente
+
+1. Clone o projeto:
+
+```
+ git clone git@github.com:thalis-freitas/psy_assess.git
+```
+
+2. Entre na pasta do projeto:
+
+```
+ cd psy_assess
+```
+
+3. Instale as dependências:
+
+```
+ npm install
+```
+
+5. Suba o servidor:
+
+```
+ npm run dev
+```
+
+6. Acesse http://localhost:5173/
