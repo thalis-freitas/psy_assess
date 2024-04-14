@@ -27,12 +27,12 @@ const fetchInstruments = async () => {
     instrumentsList.value = shuffle(response.data)
   } catch (error) {
     showToast({
-      message: `Erro ao obter os dados: ${error.response.data.errors}`,
+      message: `Erro ao obter as informações dos instrumentos: ${error.response.data.errors}`,
       color: 'danger'
     })
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 onMounted(fetchInstruments)

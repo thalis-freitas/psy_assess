@@ -30,12 +30,12 @@ const fetchEvaluated = async () => {
     evaluatedList.value = shuffle(response.data.evaluated)
   } catch (error) {
     showToast({
-      message: `Erro ao obter os dados: ${error.response.data.errors}`,
+      message: `Erro ao obter os dados do avaliado: ${error.response.data.errors}`,
       color: 'danger'
     })
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 onMounted(fetchEvaluated)
