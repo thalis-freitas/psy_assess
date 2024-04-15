@@ -167,7 +167,7 @@ const goToEvaluation = (evaluationId) => {
 
             <va-badge
               v-else
-              text="erro no envio do e-mail"
+              text="erro | e-mail não enviado"
               color="danger"
               class="top-2 mx-14"
             />

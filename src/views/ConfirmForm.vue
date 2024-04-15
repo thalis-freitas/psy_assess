@@ -1,13 +1,12 @@
 <script setup>
+import { confirmApi } from '@/services/confirmApi'
 import { convertDate } from '@/helpers/dateUtils'
-import { evaluatedApi } from '@/services/evaluatedApi'
 import { ref, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useToast } from 'vuestic-ui'
 
 const { init: showToast } = useToast()
 
-const router = useRouter()
 const route = useRoute()
 
 const evaluated = ref({
@@ -18,13 +17,12 @@ const evaluated = ref({
 })
 
 const formErrors = ref([])
-const isEditing = ref(false)
 
 onMounted(async () => {
-  if (route.params.id) {
-    isEditing.value = true
+  const token = route.params.token
+  if (token) {
     try {
-      const response = await evaluatedApi.getEvaluatedById(route.params.id)
+      const response = await confirmApi.getConfirm(token)
 
       evaluated.value = response.data.evaluated
       evaluated.value.birth_date = convertDate(evaluated.value.birth_date)
@@ -37,48 +35,33 @@ onMounted(async () => {
   }
 })
 
-const submit = async () => {
-  formErrors.value = {}
+const confirmDataToStartInstrument = async () => {
 
-  try {
-    if (isEditing.value) {
-      await evaluatedApi.updateEvaluated(route.params.id, evaluated.value)
-    } else {
-      await evaluatedApi.createEvaluated(evaluated.value)
-    }
-
-    processSuccess()
-  } catch (error) {
-    formErrors.value = error.response.data.errors
-    showToast({
-      message: 'Não foi possível realizar a operação. ' +
-               'Verifique os erros e tente novamente',
-      color: 'danger'
-    })
-  }
-}
-
-const processSuccess = () => {
-  showToast({
-    message: isEditing.value ?
-             'Atualização realizada com sucesso!' :
-             'Cadastro realizado com sucesso!',
-    color: 'success'
-  })
-  router.push('/evaluated')
 }
 </script>
 
 <template>
-  <va-card class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-12 my-6 sm:my-12">
+  <va-navbar color="primary">
+    <template #center>
+      <va-navbar-item class="font-bold text-lg">
+        PsyAssess
+      </va-navbar-item>
+    </template>
+  </va-navbar>
+
+  <va-card
+    class="sm:w-1/2 mx-6 sm:mx-auto my-6 sm:my-12"
+    color="secondary"
+    gradient
+  >
     <va-card-title>
-      {{ isEditing ? 'Editar avaliado' : 'Cadastrar avaliado' }}
+      Confirmação de dados para iniciar o instrumento
     </va-card-title>
 
     <va-card-content>
       <va-form
         class="flex flex-col gap-2 mb-2"
-        @submit.prevent="submit"
+        @submit.prevent="confirmDataToStartInstrument"
         tag="form"
       >
         <va-input
@@ -146,7 +129,7 @@ const processSuccess = () => {
           Data de nascimento {{ formErrors.birth_date[0] }}
         </va-alert>
         <span>
-          <va-button type="submit"> Salvar </va-button>
+          <va-button type="confirmDataToStartInstrument"> Próximo </va-button>
         </span>
       </va-form>
     </va-card-content>

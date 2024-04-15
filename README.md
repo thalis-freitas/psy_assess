@@ -37,7 +37,7 @@
 ### Avaliados
 
 #### Confirmação de Dados
-- [ ] Redirecionamento a partir do link no e-mail, com um token único para a sessão de avaliação
+- [x] Redirecionamento a partir do link no e-mail, com um token único para a sessão de avaliação
 - [ ] Confirmação dos dados do avaliado
 
 #### Execução do Instrumento
