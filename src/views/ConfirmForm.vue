@@ -150,7 +150,7 @@ const confirmDataToStartInstrument = async () => {
           Data de nascimento {{ formErrors.birth_date[0] }}
         </va-alert>
         <span>
-          <va-button type="confirmDataToStartInstrument"> Próximo </va-button>
+          <va-button type="submit"> Próximo </va-button>
         </span>
       </va-form>
     </va-card-content>
