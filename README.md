@@ -21,7 +21,7 @@
 - [x] Listar todos os avaliados
 - [x] Exibir dados de um avaliado específico
 - [x] Atualizar dados de um avaliado
-- [ ] Acessar os instrumentos de um avaliado
+- [x] Acessar os instrumentos de um avaliado
 
 #### Visualização dos Instrumentos disponíveis
 - [x] Listar todos os instrumentos
@@ -32,7 +32,7 @@
 - [x] Enviar por e-mail o link do instrumento ao avaliado
 
 #### Visualização dos Resultados
-- [ ] Visualizar os resultados de um instrumento finalizado
+- [x] Visualizar os resultados de um instrumento finalizado
 
 ### Avaliados
 

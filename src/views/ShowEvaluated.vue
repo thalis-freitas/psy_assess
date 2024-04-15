@@ -4,19 +4,22 @@ import { evaluationsApi } from '@/services/evaluationsApi'
 import { instrumentsApi } from '@/services/instrumentsApi'
 import { onMounted, ref } from 'vue'
 import shuffle from 'lodash/shuffle'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vuestic-ui'
 
 const { init: showToast } = useToast()
 
 const loading = ref(false)
 const route = useRoute()
+const router = useRouter()
 const evaluated = ref({})
 const showModal = ref(false)
 
 const instrument = ref('')
 const instruments = ref([])
 const formErrors = ref([])
+
+const evaluatedInstuments = ref([])
 
 const fetchEvaluated = async () => {
   try {
@@ -25,7 +28,7 @@ const fetchEvaluated = async () => {
     evaluated.value = response.data.evaluated
   } catch (error) {
     showToast({
-      message: `Erro ao obter os dados do avaliado: ${error.response.data.errors}`,
+      message: `Erro ao obter os dados do avaliado: ${error.response.data}`,
       color: 'danger'
     })
   }
@@ -41,7 +44,7 @@ const fetchInstruments = async () => {
     }))
   } catch (error) {
     showToast({
-      message: `Erro ao carregar os instrumentos: ${error.response.data.errors}`,
+      message: `Erro ao carregar os instrumentos: ${error.response.data}`,
       color: 'danger'
     })
   } finally {
@@ -49,9 +52,23 @@ const fetchInstruments = async () => {
   }
 }
 
+const fetchEvaluatedInstruments = async () => {
+  try {
+    const response = await evaluatedApi.getInstuments(route.params.id)
+
+    evaluatedInstuments.value = response.data
+  } catch (error) {
+    showToast({
+      message: `Erro ao obter os instumentos do avaliado: ${error.response.data}`,
+      color: 'danger'
+    })
+  }
+}
+
 onMounted(
   fetchEvaluated(),
-  fetchInstruments()
+  fetchInstruments(),
+  fetchEvaluatedInstruments()
 )
 
 const applyInstrument = async () => {
@@ -80,7 +97,12 @@ const processSuccess = () => {
     color: 'success'
   })
 
+  fetchEvaluatedInstruments()
   showModal.value = false
+}
+
+const goToEvaluation = (evaluationId) => {
+  router.push({ name: 'showEvaluation', params: { id: evaluationId } })
 }
 
 </script>
@@ -106,17 +128,60 @@ const processSuccess = () => {
     </div>
 
     <va-card-content>
-      <va-card outlined class="ps-3 mb-2">
-        Nome: {{ evaluated.name }}
-      </va-card>
-      <va-card outlined class="ps-3 mb-2">
-        CPF: {{ evaluated.cpf }}
-      </va-card>
-      <va-card outlined class="ps-3 mb-2">
-        E-mail: {{ evaluated.email }}
-      </va-card>
-      <va-card outlined class="ps-3 mb-2">
+      <va-card class="ps-3 py-2 mb-2">
+        Nome: {{ evaluated.name }} <br>
+        CPF: {{ evaluated.cpf }} <br>
+        E-mail: {{ evaluated.email }} <br>
         Data de nascimento: {{ evaluated.birth_date }}
+      </va-card>
+
+      <va-card
+        v-if="evaluatedInstuments && evaluatedInstuments.length > 0"
+        outlined
+        class="ps-3 mb-2"
+
+      >
+        <va-card-title>
+          Instrumentos aplicados
+        </va-card-title>
+
+
+        <div
+          v-for="instrument in evaluatedInstuments" :key="instrument.id"
+          class="flex flex-col"
+        >
+          <div>
+            <va-badge
+              v-if="instrument.status == 'finished'"
+              text="finalizado"
+              color="success"
+              class="top-2 mx-14"
+            />
+
+            <va-badge
+              v-else-if="instrument.status == 'sent'"
+              text="enviado"
+              color="primary"
+              class="top-2 mx-14"
+            />
+
+            <va-badge
+              v-else
+              text="erro no envio do e-mail"
+              color="danger"
+              class="top-2 mx-14"
+            />
+
+            <va-button
+              class="mb-2 pointer mx-12 block"
+              @click="goToEvaluation(instrument.id)"
+              :disabled="instrument.status != 'finished'"
+              preset="secondary"
+            >
+              {{ instrument.name }}
+            </va-button>
+          </div>
+        </div>
       </va-card>
     </va-card-content>
   </va-card>
