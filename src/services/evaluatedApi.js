@@ -15,5 +15,9 @@ export const evaluatedApi = {
 
   updateEvaluated: (id, params) => {
     return api.put(`evaluated/${id}`, params)
+  },
+
+  getInstuments: (id) => {
+    return api.get(`evaluated/${id}/instruments`)
   }
 }

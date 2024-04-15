@@ -43,7 +43,7 @@
 
     <template #right>
       <va-navbar-item>
-        <va-dropdown class="hidden sm:block">
+        <va-dropdown class="hidden sm:block" trigger="hover">
           <template #anchor>
             {{ currentUser.name }}
           </template>

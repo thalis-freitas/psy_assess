@@ -48,6 +48,12 @@ const router = createRouter({
           component: () => import('../views/ShowInstrument.vue'),
           props: true
         },
+        {
+          path: '/evaluation/:id',
+          name: 'showEvaluation',
+          component: () => import('../views/ShowEvaluation.vue'),
+          props: true
+        }
       ]
     }
   ]
