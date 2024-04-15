@@ -38,7 +38,7 @@
 
 #### Confirmação de Dados
 - [x] Redirecionamento a partir do link no e-mail, com um token único para a sessão de avaliação
-- [ ] Confirmação dos dados do avaliado
+- [x] Confirmação dos dados do avaliado
 
 #### Execução do Instrumento
 - [ ] Iniciar a execução do instrumento

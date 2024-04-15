@@ -9,6 +9,8 @@ const { init: showToast } = useToast()
 
 const route = useRoute()
 
+const evaluationId = ref('')
+
 const evaluated = ref({
   name: '',
   cpf: '',
@@ -25,6 +27,7 @@ onMounted(async () => {
       const response = await confirmApi.getConfirm(token)
 
       evaluated.value = response.data.evaluated
+      evaluationId.value = response.data.evaluation.id
       evaluated.value.birth_date = convertDate(evaluated.value.birth_date)
     } catch (error) {
       showToast({
@@ -36,7 +39,25 @@ onMounted(async () => {
 })
 
 const confirmDataToStartInstrument = async () => {
+  formErrors.value = {}
 
+  try {
+    await confirmApi.postConfirmData(evaluationId.value, {
+      evaluated: evaluated.value
+    })
+
+    showToast({
+      message: 'Dados confirmados!',
+      color: 'success'
+    })
+  } catch (error) {
+    formErrors.value = error.response.data.errors
+    showToast({
+      message: 'Não foi possível realizar a operação. ' +
+               'Verifique os erros e tente novamente',
+      color: 'danger'
+    })
+  }
 }
 </script>
 
