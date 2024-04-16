@@ -3,6 +3,7 @@
 ## Sumário
   * [Descrição do projeto](#descrição-do-projeto)
   * [Funcionalidades](#funcionalidades)
+  * [Dependências](#dependências)
   * [Passo a passo para rodar o projeto localmente](#passo-a-passo-para-rodar-o-projeto-localmente)
 
 ## Descrição do projeto
@@ -43,6 +44,10 @@
 #### Execução do Instrumento
 - [x] Iniciar a execução do instrumento
 - [x] Enviar respostas do instrumento
+
+## Dependências
+
+- **[Node.js](https://nodejs.org/)**: Versão 20.11. A aplicação foi desenvolvida e testada utilizando essa versão. Outras versões podem apresentar incompatibilidades.
 
 ## Passo a passo para rodar o projeto localmente
 
