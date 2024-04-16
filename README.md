@@ -44,10 +44,6 @@
 - [x] Iniciar a execução do instrumento
 - [x] Enviar respostas do instrumento
 
-<div align="center">
-  :construction: Em desenvolvimento...
-</div>
-
 ## Passo a passo para rodar o projeto localmente
 
 1. Clone o projeto:

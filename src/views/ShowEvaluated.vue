@@ -166,6 +166,13 @@ const goToEvaluation = (evaluationId) => {
             />
 
             <va-badge
+              v-else-if="instrument.status == 'in_progress'"
+              text="em andamento"
+              color="secondary"
+              class="top-2 mx-14"
+            />
+
+            <va-badge
               v-else
               text="erro | e-mail não enviado"
               color="danger"
