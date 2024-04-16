@@ -27,9 +27,10 @@ onMounted(fetchEvaluation)
 
 <template>
   <va-card
-    class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-12 my-6 sm:my-12"
+    class="sm:m-12 ms-20 me-6 px-6 my-6"
     color="secondary"
     gradient
+    v-if="evaluation.status == 'finished'"
   >
     <va-card-title>
       Informações da avaliação finalizada
@@ -50,6 +51,20 @@ onMounted(fetchEvaluation)
           Resultado: {{ evaluation.score }}
         </li>
       </ul>
+    </va-card-content>
+  </va-card>
+
+  <va-card
+    v-else
+    class="sm:px-6 ms-20 me-6 px-4 sm:mx-12 my-6 sm:my-12 py-2"
+    color="secondary"
+    gradient
+  >
+    <va-card-title>
+      Informações da avaliação finalizada
+    </va-card-title>
+    <va-card-content>
+      Avaliação em andamento!
     </va-card-content>
   </va-card>
 </template>

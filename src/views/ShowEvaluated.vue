@@ -109,7 +109,7 @@ const goToEvaluation = (evaluationId) => {
 
 <template>
   <va-card
-    class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-12 my-6 sm:my-12"
+    class="sm:m-12 ms-20 me-6 px-6 my-6"
   >
     <div class="flex justify-between items-center">
       <va-card-title>
@@ -162,6 +162,13 @@ const goToEvaluation = (evaluationId) => {
               v-else-if="instrument.status == 'sent'"
               text="enviado"
               color="primary"
+              class="top-2 mx-14"
+            />
+
+            <va-badge
+              v-else-if="instrument.status == 'in_progress'"
+              text="em andamento"
+              color="secondary"
               class="top-2 mx-14"
             />
 

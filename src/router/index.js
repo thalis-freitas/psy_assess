@@ -17,6 +17,12 @@ const router = createRouter({
       props: true
     },
     {
+      path: '/evaluation/:id/start',
+      name: 'formEvaluation',
+      component: () => import('../views/FormEvaluation.vue'),
+      props: true
+    },
+    {
       path: '/',
       name: '/',
       component: AuthenticatedLayout,
@@ -67,7 +73,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('psyAssessToken')
-  const openRoutes = ['login', 'confirmForm']
+  const openRoutes = ['login', 'confirmForm', 'formEvaluation']
 
   if (openRoutes.includes(to.name) || token) next()
   next({ name: 'login' })
