@@ -12,8 +12,6 @@ const evaluation = ref({
   }
 })
 
-const errors = ref({})
-
 const loading = ref(true)
 const responses = ref({})
 
@@ -28,7 +26,7 @@ const fetchEvaluation = async () => {
     })
   } catch (error) {
     showToast({
-      message: `Erro ao obter os dados do instrumento: ${error.response.data.errors}`,
+      message: `Erro ao obter os dados do instrumento: ${error.response.data.message}`,
       color: 'danger'
     })
   } finally {
@@ -39,15 +37,11 @@ const fetchEvaluation = async () => {
 onMounted(fetchEvaluation)
 
 const submitResponses = async () => {
-  errors.value = {}
-
   try {
     await processSubmit()
   } catch (error) {
-    errors.value = error.response.data.errors
-
     showToast({
-      message: 'Ocorreu um erro ao enviar as respostas.',
+      message:  'Ocorreu um erro ao enviar as respostas! Tente novamente.',
       color: 'danger'
     })
   }
@@ -65,6 +59,8 @@ const processSubmit = async () => {
     message: 'Respostas enviadas com sucesso!',
     color: 'success'
   })
+
+  fetchEvaluation()
 }
 
 </script>
@@ -81,26 +77,28 @@ const processSubmit = async () => {
   <va-progress-bar class="pb-6"  v-if="loading" indeterminate />
 
   <va-card
+    v-else-if="evaluation.status == 'finished'"
+    class="sm:px-6 ms-20 me-6 px-4 sm:mx-12 my-6 sm:my-12 py-2"
+    color="secondary"
+    gradient
+  >
+    <va-card-title>
+      Execução do instrumento
+    </va-card-title>
+    <va-card-content>
+      Instrumento finalizado!
+    </va-card-content>
+  </va-card>
+  <va-card
     v-else
-    class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-12 my-6 sm:my-12"
+    class="sm:m-12 ms-20 me-6 px-6 my-6"
     color="secondary"
     gradient
   >
     <va-card-title>
       Execução do instrumento - {{ evaluation.instrument.name }}
     </va-card-title>
-
     <va-card-content>
-      <va-alert
-        v-if="errors.base"
-        dense
-        color="warning"
-        icon="warning"
-        class="w-full mb-4"
-      >
-        {{ errors.base[0] }}
-      </va-alert>
-
       <form
         @submit.prevent="submitResponses" :key="evaluation.id"
       >

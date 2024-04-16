@@ -70,7 +70,7 @@ const processSuccess = () => {
 </script>
 
 <template>
-  <va-card class="sm:mx-12 sm:px-6 ms-20 me-6 px-6 sm:mx-12 my-6 sm:my-12">
+  <va-card class="sm:m-12 ms-20 me-6 px-6 my-6">
     <va-card-title>
       {{ isEditing ? 'Editar avaliado' : 'Cadastrar avaliado' }}
     </va-card-title>
