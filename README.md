@@ -41,8 +41,8 @@
 - [x] Confirmação dos dados do avaliado
 
 #### Execução do Instrumento
-- [ ] Iniciar a execução do instrumento
-- [ ] Enviar respostas do instrumento
+- [x] Iniciar a execução do instrumento
+- [x] Enviar respostas do instrumento
 
 <div align="center">
   :construction: Em desenvolvimento...

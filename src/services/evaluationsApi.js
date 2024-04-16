@@ -7,5 +7,13 @@ export const evaluationsApi = {
 
   getEvaluationById: (id) => {
     return api.get(`evaluations/${id}`)
+  },
+
+  getStartEvaluation: (id) => {
+    return api.get(`evaluations/${id}/start`)
+  },
+
+  submitAnswers: (id, params) => {
+    return api.post(`evaluations/${id}/answers`, params)
   }
 }

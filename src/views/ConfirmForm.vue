@@ -2,12 +2,13 @@
 import { confirmApi } from '@/services/confirmApi'
 import { convertDate } from '@/helpers/dateUtils'
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vuestic-ui'
 
 const { init: showToast } = useToast()
 
 const route = useRoute()
+const router = useRouter()
 
 const evaluationId = ref('')
 
@@ -50,6 +51,8 @@ const confirmDataToStartInstrument = async () => {
       message: 'Dados confirmados!',
       color: 'success'
     })
+
+    router.push({ name : 'formEvaluation', params: { id: evaluationId.value } })
   } catch (error) {
     formErrors.value = error.response.data.errors
     showToast({
@@ -76,7 +79,7 @@ const confirmDataToStartInstrument = async () => {
     gradient
   >
     <va-card-title>
-      Confirmação de dados para iniciar o instrumento
+      Confirme seus dados para iniciar o instrumento
     </va-card-title>
 
     <va-card-content>
